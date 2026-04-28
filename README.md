@@ -32,8 +32,8 @@ BTS Official Source
        ▼
   dbt Transformation
   ┌────────────────────────────────┐
-  │  Staging → Core → Mart        │
-  │  (4-layer architecture)       │
+  │  Staging → Core → Mart         │
+  │  (4-layer architecture)        │
   └────────────────────────────────┘
        │
        ▼
