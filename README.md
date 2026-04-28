@@ -23,7 +23,7 @@ BTS Official Source
        │
        ▼
   AWS S3 Data Lake
-  (Partitioned: /year=/month=/)
+  (Partitioned: year=2024/month=1,2,3)
        │
        ▼
   Snowflake Raw Layer
