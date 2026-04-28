@@ -1,5 +1,13 @@
 # US DOT Flights — End-to-End Data Engineering Pipeline
 
+![Python](https://img.shields.io/badge/Python-3.9+-3776AB?style=flat&logo=python&logoColor=white)
+![AWS S3](https://img.shields.io/badge/AWS_S3-Data_Lake-FF9900?style=flat&logo=amazons3&logoColor=white)
+![Snowflake](https://img.shields.io/badge/Snowflake-Data_Warehouse-29B5E8?style=flat&logo=snowflake&logoColor=white)
+![dbt](https://img.shields.io/badge/dbt-Transformation-FF694B?style=flat&logo=dbt&logoColor=white)
+![Airflow](https://img.shields.io/badge/Apache_Airflow-Orchestration-017CEE?style=flat&logo=apacheairflow&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-Containerized-2496ED?style=flat&logo=docker&logoColor=white)
+![SQL](https://img.shields.io/badge/SQL-Modeling-4479A1?style=flat&logo=postgresql&logoColor=white)
+
 A production-grade data engineering pipeline ingesting real US Department of Transportation (DOT) Bureau of Transportation Statistics (BTS) flight data into a cloud data warehouse, modeled with dbt, and orchestrated with Apache Airflow.
 
 ---
