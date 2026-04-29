@@ -1,0 +1,19 @@
+# =============================================================
+# dbt profiles.yml for Airflow container
+# Uses environment variables so credentials stay in .env file
+# =============================================================
+
+dbt_dot_flights:
+  outputs:
+    dev:
+      type: snowflake
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
+      role: "{{ env_var('SNOWFLAKE_ROLE') }}"
+      database: "{{ env_var('SNOWFLAKE_DATABASE') }}"
+      warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE') }}"
+      schema: STAGING
+      threads: 4
+      insecure_mode: True
+  target: dev
