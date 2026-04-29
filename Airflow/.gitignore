@@ -1,0 +1,9 @@
+# Credentials - NEVER commit
+.env
+ 
+# Airflow runtime
+logs/
+plugins/
+ 
+# Docker
+postgres-data/
