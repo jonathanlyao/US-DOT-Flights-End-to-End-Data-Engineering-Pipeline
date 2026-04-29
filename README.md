@@ -112,27 +112,45 @@ dbt_test
 ## Project Structure
 
 ```
-dot-flights-pipeline/
-├── dags/
-│   └── dot_flights_pipeline.py      # Airflow DAG
-├── models/
-│   ├── staging/
-│   │   └── stg_flights.sql
-│   ├── core/
-│   │   ├── fact_flights.sql
-│   │   ├── dim_carrier.sql
-│   │   ├── dim_date.sql
-│   │   └── dim_airport.sql
-│   └── mart/
-│       ├── mart_carrier_performance_monthly.sql
-│       └── mart_delay_attribution_monthly.sql
-├── tests/
-├── scripts/
-│   └── ingest_dot_data.py           # Parameterized download + S3 upload
-├── docker-compose.yml               # Airflow stack
-├── dbt_project.yml
-├── profiles.yml
-└── .env.example
+US-DOT-Flights-End-to-End-Data-Engineering-Pipeline/
+├── Airflow/
+│   ├── dags/
+│   │   └── dot_flights_pipeline.py        # Airflow DAG
+│   ├── docker-compose.yml                 # Airflow Docker Compose stack
+│   ├── Dockerfile                         # Custom Airflow image
+│   └── requirements.txt                   # Airflow runtime dependencies
+│
+├── Data Ingestion/
+│   ├── step1_download_and_inspect.py       # Download and inspect BTS monthly ZIP/CSV
+│   ├── step2_upload_to_s3.py               # Upload original ZIP to S3 with ingestion log
+│   └── step2b_recompress_upload.py         # Recompress CSV to GZIP and upload to S3
+│
+├── Snowflake SQL/
+│   ├── 01_database_schema_warehouse.sql    # Create database, schema, and warehouse
+│   ├── 02_storage_integration_stage.sql    # Configure S3 integration and external stage
+│   ├── 03_create_raw_flights.sql           # Create RAW_FLIGHTS table
+│   └── 04_copy_into_raw_flights.sql        # Load GZIP files into Snowflake raw layer
+│
+├── dbt/
+│   ├── dbt_project.yml                     # dbt project configuration
+│   ├── profiles.yml.example                # Example dbt profile without credentials
+│   └── models/
+│       ├── staging/
+│       │   └── stg_flights.sql
+│       ├── core/
+│       │   ├── fact_flights.sql
+│       │   ├── dim_carrier.sql
+│       │   ├── dim_date.sql
+│       │   └── dim_airport.sql
+│       └── mart/
+│           ├── mart_carrier_performance_monthly.sql
+│           └── mart_delay_attribution_monthly.sql
+│
+├── Models/
+│   └── screenshots_or_model_notes/          # Optional model documentation or screenshots
+│
+├── .gitignore
+└── README.md
 ```
 
 ---
