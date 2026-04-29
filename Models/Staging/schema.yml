@@ -1,0 +1,86 @@
+version: 2
+
+models:
+  - name: stg_flights
+    description: "Staged DOT flight data. Type-cast, cleaned, filtered to AA/UA/DL carriers only."
+    columns: 
+      # === Core identifiers - these should never be null ===
+      - name: flight_date
+        description: "Date of the flight (YYYY-MM-DD format)"
+        tests: 
+          - not_null
+      
+      - name: carrier_code
+        description: "IATA carrier code (e.g. AA, UA, DL)"
+        tests: 
+          - not_null
+          - accepted_values:
+              values:
+                - 'AA'
+                - 'DL'
+                - 'UA'
+
+      - name: flight_number
+        description: "Flight number as string (e.g. '100', '2503')"
+        tests: 
+          - not_null
+      
+      - name: origin
+        description: "Origin airport IATA code"
+        tests: 
+          - not_null
+      
+      - name: dest
+        description: "Destination airport IATA code"
+        tests: 
+          - not_null
+
+      # === Status flags - should always be present === 
+      - name: is_cancelled
+        description: "True if flight was cancelled, False if not"
+        tests: 
+          - not_null
+          - accepted_values:
+              values: [True, False]
+              quote: False
+
+      - name: is_diverted
+        description: "True if flight was diverted, False if not. Cancelled flights are not diverted."
+        tests: 
+          - not_null
+          - accepted_values:
+              values: [True, False]
+              quote: False
+      
+      # === Numeric fields - not_null only when flight operated (i.e. not cancelled) ===
+      - name: distance_miles
+        description: "Distance of the flight in miles. Not null for non-cancelled flights."
+        tests: 
+          - not_null
+
+      - name: flight_year
+        description: "4-digit year of the flight. Not null for non-cancelled flights."
+        tests: 
+          - not_null
+          - accepted_values:
+              values: ['2024']
+              quote: False
+      
+      - name: flight_month
+        description: "Month of the flight (1-12). Not null for non-cancelled flights."
+        tests: 
+          - not_null
+          - accepted_values:
+              values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+              quote: False
+
+      # === Metadata - should always be populated by COPY INTO === 
+      - name: source_file
+        description: "S3 source file path from METADATA$FILENAME. Useful for debugging and tracing back to raw data."
+        tests: 
+          - not_null
+
+      - name: loaded_at
+        description: "Timestamp of when the row was loaded into Snowflake. Populated by COPY INTO using CURRENT_TIMESTAMP(). Useful for monitoring data freshness and load times."
+        tests: 
+          - not_null

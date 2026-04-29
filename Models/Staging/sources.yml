@@ -1,0 +1,30 @@
+version: 2
+
+sources:
+  - name: raw
+    description: "Raw DOT BTS flight data loaded from S3 via COPY INTO. All columns are VARCHAR."
+    database: DOT_FLIGHTS
+    schema: RAW
+    tables: 
+      - name: raw_flights
+        description: "Monthly on-time performance data from the Bureau of Transportation Statistics. One row per scheduled flight leg."
+        columns:
+          - name: Year
+            description: "4-digit year of the flight"
+          - name: Month
+            description: "Month of the flight (1-12)"
+          - name: FlightDate
+            description: "Date of the flight (YYYY-MM-DD format as string)"
+          - name: Reporting_Airline
+            description: "IATA carrier code (e.g. AA, UA, DL)"
+          - name: Origin
+            description: "Origin airport IATA code"
+          - name: Dest
+            description: "Destination airport IATA code"
+          - name: DepDelay
+            description: "Departure delay in minutes (negative = early). NULL for cancelled flights."
+          - name: ArrDelay
+            description: "Arrival delay in minutes (negative = early). NULL for cancelled/diverted flights."
+          - name: Cancelled
+            description: "1.00 if cancelled, 0.00 if not"
+ 
