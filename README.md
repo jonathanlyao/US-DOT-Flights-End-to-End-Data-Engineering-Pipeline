@@ -179,6 +179,7 @@ docker-compose up -d
 # UI available at http://localhost:8080
 # Default credentials: airflow / airflow
 ```
+<img width="1843" height="846" alt="image" src="https://github.com/user-attachments/assets/1b0cba99-95f2-4946-9277-6a7fe4ee1193" />
 
 ### 4. Trigger Pipeline
 
